@@ -1,5 +1,3 @@
-
-
 var GameOfLife = {
   initialize: function(sizeX, sizeY) {
     this.world = [];
@@ -76,5 +74,46 @@ var GameOfLife = {
       }
     }
   }
-
 };
+
+
+
+$(document).ready(function() {
+
+  var gameOfLife = Object.create(GameOfLife);
+  gameOfLife.initialize(5, 5);
+
+  gameOfLife.setStatus(2,1, true);
+  gameOfLife.setStatus(2,2, true);
+  gameOfLife.setStatus(3,1, true);
+  gameOfLife.setStatus(3, 2, true);
+  gameOfLife.setStatus(3, 3, true);
+  gameOfLife.setStatus(3, 4, true);
+
+
+  var mainLoop = function() {
+    console.log(gameOfLife.world);
+
+    gameOfLife.generation();
+
+    $("#game-display").empty();
+
+    for(var y=0; y < gameOfLife.sizeY; y++) {
+      $("#game-display").append("<p>");
+      for(var x=0; x < gameOfLife.sizeX; x++) {
+        if (gameOfLife.getStatus(x, y)) {
+          $('#game-display').append("<img src='img/notblank.jpg'>");//'<span style="font-size: 25px;">.</span>');
+        } else {
+          $('#game-display').append("<img src='img/blank.jpg'>");//&nbsp;");
+        }
+      }
+      $("#game-display").append("</p>");
+    }
+
+  }
+
+  window.setInterval(mainLoop, 100);
+  mainLoop();
+
+});
+
