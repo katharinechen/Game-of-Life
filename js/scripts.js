@@ -1,10 +1,12 @@
 var GameOfLife = {
   initialize: function(sizeX, sizeY) {
     this.world = [];
+    this.nextWorld = [];
     this.sizeX = sizeX;
     this.sizeY = sizeY;
     for(var index = 0; index < sizeX * sizeY; index++) {
       this.world.push(false);
+      this.nextWorld.push(false);
     }
     return this.world;
   },
@@ -21,7 +23,7 @@ var GameOfLife = {
   setStatus: function(x, y, isAlive) {
     var index = this.getIndex(x, y);
     if (index === -1) { return -1; }
-    this.world[this.getIndex(x, y)] = isAlive;
+    this.nextWorld[this.getIndex(x, y)] = isAlive;
     return 1;
   },
 
@@ -73,7 +75,9 @@ var GameOfLife = {
         this.updateStatus(x,y);
       }
     }
+    this.world = this.nextWorld.slice(0);
   }
+
 };
 
 
@@ -83,12 +87,13 @@ $(document).ready(function() {
   var gameOfLife = Object.create(GameOfLife);
   gameOfLife.initialize(5, 5);
 
-  gameOfLife.setStatus(2,1, true);
-  gameOfLife.setStatus(2,2, true);
-  gameOfLife.setStatus(3,1, true);
-  gameOfLife.setStatus(3, 2, true);
-  gameOfLife.setStatus(3, 3, true);
-  gameOfLife.setStatus(3, 4, true);
+  gameOfLife.setStatus(1,1, true);
+  gameOfLife.setStatus(1,2, true);
+  gameOfLife.setStatus(1,3, true);
+
+  // gameOfLife.setStatus(3,2, true);
+  // gameOfLife.setStatus(3,3, true);
+  // gameOfLife.setStatus(3,4, true);
 
 
   var mainLoop = function() {
@@ -112,7 +117,7 @@ $(document).ready(function() {
 
   }
 
-  window.setInterval(mainLoop, 100);
+  window.setInterval(mainLoop, 500);
   mainLoop();
 
 });
