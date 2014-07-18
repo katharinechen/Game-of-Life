@@ -67,6 +67,14 @@ var GameOfLife = {
         return;
       }
     }
+  },
+
+  generation: function() {
+    for (var y=0; y < this.sizeY; y++) {
+      for(var x=0; x < this.sizeX; x++) {
+        this.updateStatus(x,y);
+      }
+    }
   }
 
 };

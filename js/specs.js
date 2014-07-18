@@ -96,16 +96,35 @@ describe("GameOfLife", function() {
     });
   });
 
-  // describe("generation", function() {
-  //   it("simulates a single generation and returns an array that correctly follows the Game of Life rules", function() {
-  //     var gameOfLife = Object.create(GameOfLife);
-  //     gameOfLife.initialize(3, 3);
-  //     gameOfLife.setStatus(0, 0, true);
+  describe("generation", function() {
+    it("simulates a single generation with 2 initial live cells with no neighbors", function() {
+      var gameOfLife = Object.create(GameOfLife);
+      gameOfLife.initialize(3, 3);
+      gameOfLife.setStatus(1, 0, true);
+      gameOfLife.setStatus(2, 2, true);
 
-  //     gameOfLife.generation().should.eql([false, false, false, false, false, false, false, false, false]);
+      gameOfLife.generation();
+      gameOfLife.world.should.eql([false, false, false, false, false, false, false, false, false]);
+    });
+    it("simulates a single generation for a simple 2x2 world", function() {
+      var gameOfLife = Object.create(GameOfLife);
+      gameOfLife.initialize(2, 2);
 
-  //   });
-  // });
+      gameOfLife.setStatus(1, 0, true);
+      gameOfLife.setStatus(0, 1, true);
+      gameOfLife.setStatus(1, 1, true);
+
+      gameOfLife.generation();
+      gameOfLife.world.should.eql([true, true, true, true]);
+
+    });
+  });
 
 });
 
+
+
+// Any live cell with fewer than two live neighbours dies, as if caused by under-population.
+// Any live cell with two or three live neighbours lives on to the next generation.
+// Any live cell with more than three live neighbours dies, as if by overcrowding.
+// Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.
