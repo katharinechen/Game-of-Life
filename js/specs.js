@@ -52,6 +52,60 @@ describe("GameOfLife", function() {
 
     });
   });
+  describe("updateStatus", function() {
+    it("toggles true cells to false when that cell has fewer than two live neighbors", function() {
+      var gameOfLife = Object.create(GameOfLife);
+      gameOfLife.initialize(3, 3);
+      gameOfLife.setStatus(0, 0, true);
+      gameOfLife.world[0].should.equal(true);
+
+      gameOfLife.updateStatus(0, 0);
+      gameOfLife.world[0].should.equal(false);
+    });
+    it("stay true if cell have two or three live neighbors", function() {
+      var gameOfLife = Object.create(GameOfLife);
+      gameOfLife.initialize(3, 3);
+      gameOfLife.setStatus(1, 1, true);
+      gameOfLife.world[4].should.equal(true);
+      gameOfLife.setStatus(2, 0, true);
+      gameOfLife.setStatus(2, 1, true);
+      gameOfLife.setStatus(0, 2, true);
+
+      gameOfLife.updateStatus(1, 1);
+      gameOfLife.world[4].should.equal(true);
+    });
+    it("toggles true cells to false when selected cell has more than three live neighbors", function() {
+      var gameOfLife = Object.create(GameOfLife);
+      gameOfLife.initialize(3,3);
+      gameOfLife.world.forEach(function(cell) {
+        cell = true;
+      });
+      gameOfLife.updateStatus(1,1);
+      gameOfLife.getStatus(1,1).should.equal(false);
+    });
+    it("sets any dead(false) cell to true if that cell has exactly three living (true) neighbors", function() {
+      var gameOfLife = Object.create(GameOfLife);
+      gameOfLife.initialize(3, 3);
+
+      gameOfLife.setStatus(1, 0, true);
+      gameOfLife.setStatus(1, 1, true);
+      gameOfLife.setStatus(0, 1, true);
+
+      gameOfLife.updateStatus(0, 0);
+      gameOfLife.getStatus(0, 0).should.equal(true);
+    });
+  });
+
+  // describe("generation", function() {
+  //   it("simulates a single generation and returns an array that correctly follows the Game of Life rules", function() {
+  //     var gameOfLife = Object.create(GameOfLife);
+  //     gameOfLife.initialize(3, 3);
+  //     gameOfLife.setStatus(0, 0, true);
+
+  //     gameOfLife.generation().should.eql([false, false, false, false, false, false, false, false, false]);
+
+  //   });
+  // });
 
 });
 
