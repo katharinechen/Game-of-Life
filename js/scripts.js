@@ -84,41 +84,64 @@ var GameOfLife = {
 
 $(document).ready(function() {
 
-  var gameOfLife = Object.create(GameOfLife);
-  gameOfLife.initialize(5, 5);
+  $("#game-setup").submit(function(event){
 
-  gameOfLife.setStatus(1,1, true);
-  gameOfLife.setStatus(1,2, true);
-  gameOfLife.setStatus(1,3, true);
+    // var length = $("#xcord").val();
+    // var height = $("#ycord").val();
 
-  // gameOfLife.setStatus(3,2, true);
-  // gameOfLife.setStatus(3,3, true);
-  // gameOfLife.setStatus(3,4, true);
+//    gameOfLife.initialize(length, height);
 
+    alert("In submit()");
+    var x, y;
+    var gameOfLife = Object.create(GameOfLife);
+    gameOfLife.initialize(40, 40);
 
-  var mainLoop = function() {
-    console.log(gameOfLife.world);
-
-    gameOfLife.generation();
-
-    $("#game-display").empty();
-
-    for(var y=0; y < gameOfLife.sizeY; y++) {
-      $("#game-display").append("<p>");
-      for(var x=0; x < gameOfLife.sizeX; x++) {
-        if (gameOfLife.getStatus(x, y)) {
-          $('#game-display').append("<img src='img/notblank.jpg'>");//'<span style="font-size: 25px;">.</span>');
-        } else {
-          $('#game-display').append("<img src='img/blank.jpg'>");//&nbsp;");
+    for(y=0;y<40;y++) {
+      for(x = 0; x < 40; x++) {
+        if (!(parseInt(Math.random() * 3))) {
+          gameOfLife.setStatus(x, y, true);
         }
+
       }
-      $("#game-display").append("</p>");
+    }
+    // gameOfLife.setStatus(1,1, true);
+    // gameOfLife.setStatus(1,2, true);
+    // gameOfLife.setStatus(1,3, true);
+
+    $("#game-board").show();
+
+    var mainLoop = function() {
+      console.log(gameOfLife.world);
+
+      gameOfLife.generation();
+
+      $("#game-board").empty();
+
+      var tableHTML = "";
+      for( y=0; y < gameOfLife.sizeY; y++) {
+        tableHTML = tableHTML + "<tr>";
+        //$("#game-board").append("<tr>");
+        for( x=0; x < gameOfLife.sizeX; x++) {
+          if (gameOfLife.getStatus(x, y)) {
+            tableHTML = tableHTML + "<td class='nonblank'>&nbsp;</td>";
+            //$('#game-board').append("<td class='nonblank'>&nbsp;</td>");
+          } else {
+            tableHTML = tableHTML + "<td class='blank'>&nbsp;</td>";
+            //$('#game-board').append("<td class='blank'>&nbsp;</td>");
+          }
+        }
+
+        tableHTML = tableHTML + "</tr>";
+        //$("td:last-child").after("</tr>");
+      }
+
+      $("#game-board").append(tableHTML);
     }
 
-  }
 
-  window.setInterval(mainLoop, 500);
-  mainLoop();
-
+    window.setInterval(mainLoop, 100);
+    mainLoop();
+    event.preventDefault();
+  });
 });
 

@@ -2,3 +2,27 @@ h1 {
   font-size: 4em;
   color: #111111;
 }
+
+.nonblank {
+  background-color: black;
+}
+
+.blank {
+  background-color: white;
+}
+
+#game-board {
+  display: none;
+}
+
+
+#game-board td tr {
+  padding: 0px;
+  margin: 0px;
+  border: 3px solid black;
+}
+
+#game-board td {
+  width: 20px;
+  height: 10px;
+}
