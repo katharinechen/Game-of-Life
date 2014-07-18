@@ -10,9 +10,8 @@ var GameOfLife = {
     }
     return this.world;
   },
-  // returns the index (place to read/write) for this.world
-  // array
-  // returns -1 for invalid indexes
+  // returns the index (place to read/write) for this.world array
+  // returns -1 for invalid index
   getIndex: function(x, y) {
     if (x >= this.sizeX || x < 0 || y > this.sizeY || y < 0) {
       return -1;
@@ -37,7 +36,6 @@ var GameOfLife = {
   countNeighbors: function(x,y) {
     var count = 0;
 
-    // check the left neighbor
     if (this.getStatus(x-1, y))   { count ++; }
     if (this.getStatus(x+1, y))   { count ++; }
     if (this.getStatus(x-1, y-1)) { count ++; }
@@ -84,29 +82,19 @@ var GameOfLife = {
 
 $(document).ready(function() {
 
-  $("#game-setup").submit(function(event){
 
-    // var length = $("#xcord").val();
-    // var height = $("#ycord").val();
-
-//    gameOfLife.initialize(length, height);
-
-    alert("In submit()");
     var x, y;
     var gameOfLife = Object.create(GameOfLife);
-    gameOfLife.initialize(40, 40);
+    gameOfLife.initialize(80, 60);
 
-    for(y=0;y<40;y++) {
-      for(x = 0; x < 40; x++) {
+    for(y=0;y < 60;y++) {
+      for(x = 0; x < 80; x++) {
         if (!(parseInt(Math.random() * 3))) {
           gameOfLife.setStatus(x, y, true);
         }
 
       }
     }
-    // gameOfLife.setStatus(1,1, true);
-    // gameOfLife.setStatus(1,2, true);
-    // gameOfLife.setStatus(1,3, true);
 
     $("#game-board").show();
 
@@ -120,28 +108,154 @@ $(document).ready(function() {
       var tableHTML = "";
       for( y=0; y < gameOfLife.sizeY; y++) {
         tableHTML = tableHTML + "<tr>";
-        //$("#game-board").append("<tr>");
         for( x=0; x < gameOfLife.sizeX; x++) {
           if (gameOfLife.getStatus(x, y)) {
             tableHTML = tableHTML + "<td class='nonblank'>&nbsp;</td>";
-            //$('#game-board').append("<td class='nonblank'>&nbsp;</td>");
           } else {
             tableHTML = tableHTML + "<td class='blank'>&nbsp;</td>";
-            //$('#game-board').append("<td class='blank'>&nbsp;</td>");
           }
         }
-
         tableHTML = tableHTML + "</tr>";
-        //$("td:last-child").after("</tr>");
       }
-
       $("#game-board").append(tableHTML);
-    }
-
+    } // mainLoop()
 
     window.setInterval(mainLoop, 100);
     mainLoop();
-    event.preventDefault();
-  });
+
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//   $("#game-setup").submit(function(event){
+
+//     // var length = $("#xcord").val();
+//     // var height = $("#ycord").val();
+
+// //    gameOfLife.initialize(length, height);
+
+//     var x, y;
+//     var gameOfLife = Object.create(GameOfLife);
+//     gameOfLife.initialize(80, 50);
+
+//     for(y=0;y < 50;y++) {
+//       for(x = 0; x < 80; x++) {
+//         if (!(parseInt(Math.random() * 3))) {
+//           gameOfLife.setStatus(x, y, true);
+//         }
+
+//       }
+//     }
+//     // gameOfLife.setStatus(1,1, true);
+//     // gameOfLife.setStatus(1,2, true);
+//     // gameOfLife.setStatus(1,3, true);
+
+//     $("#game-board").show();
+
+//     var mainLoop = function() {
+//       console.log(gameOfLife.world);
+
+//       gameOfLife.generation();
+
+//       $("#game-board").empty();
+
+//       var tableHTML = "";
+//       for( y=0; y < gameOfLife.sizeY; y++) {
+//         tableHTML = tableHTML + "<tr>";
+//         //$("#game-board").append("<tr>");
+//         for( x=0; x < gameOfLife.sizeX; x++) {
+//           if (gameOfLife.getStatus(x, y)) {
+//             tableHTML = tableHTML + "<td class='nonblank'>&nbsp;</td>";
+//             //$('#game-board').append("<td class='nonblank'>&nbsp;</td>");
+//           } else {
+//             tableHTML = tableHTML + "<td class='blank'>&nbsp;</td>";
+//             //$('#game-board').append("<td class='blank'>&nbsp;</td>");
+//           }
+//         }
+
+//         tableHTML = tableHTML + "</tr>";
+//         //$("td:last-child").after("</tr>");
+//       }
+
+//       $("#game-board").append(tableHTML);
+//     }
+
+
+//     window.setInterval(mainLoop, 100);
+//     mainLoop();
+//     event.preventDefault();
+//   });
+// });
 
