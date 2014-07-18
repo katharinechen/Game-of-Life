@@ -1,4 +1,7 @@
-JavaScript Project Boilerplate
+Conway's Game of Life
+7/18/2014
+Katharine Chen & Justin Speers
 =======================
 
-Quick starter for assignments at Epicodus.
+
+A simulation of Conway's Game of Life in Javascript.
