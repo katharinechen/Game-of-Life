@@ -1,0 +1,60 @@
+// Project Scripts
+
+
+world = [];
+
+for(x = 0; x < 10000; x++) {
+  if ((Math.random() * 10) < 2)  {
+    world.push(true);
+  } else {
+    world.push(false);
+  }
+}
+
+
+Game :
+  world[],
+
+  getIndex(x, y) {
+    y * (length) + x;
+  }
+  getStatus(x, y) {
+    return this.world(getIndex(x, y));
+  }
+
+  countNeighbors(x, y) {
+      var count = 0;
+     if (getStatus(x-1,y)) {
+      count++;
+     }
+
+     if (getStatus(x-1, y-1)) {
+      count++;
+     }
+     if (getStatus(x, y+1)) {
+      count++;
+     }
+     return count;
+  }
+
+  var alive = true;
+  var dead = false;
+  if countNeighbors(x, y) === 2)
+{
+  setStatus(x, y), dead}
+  setStatus(x, y, trueOrFalse) {
+    this.world[getIndex(x, y)] = trueOrFalse;
+  }
+____________________________
+
+object {
+  current statue of true or false;
+  statusx=
+  statusy=
+  function check your neighbor:
+}
+
+checkNeighbors(x, y) {
+  neighborLeft = getStatus(x - 1, y);
+
+}
