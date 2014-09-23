@@ -30,12 +30,10 @@ var GameOfLife = {
     var index = this.getIndex(x, y);
     if (index === -1) { return false; }
     return this.world[this.getIndex(x, y)];
-
   },
 
   countNeighbors: function(x,y) {
     var count = 0;
-
     if (this.getStatus(x-1, y))   { count ++; }
     if (this.getStatus(x+1, y))   { count ++; }
     if (this.getStatus(x-1, y-1)) { count ++; }
@@ -44,7 +42,6 @@ var GameOfLife = {
     if (this.getStatus(x-1, y+1)) { count ++; }
     if (this.getStatus(x,   y+1)) { count ++; }
     if (this.getStatus(x+1, y+1)) { count ++; }
-
     return count;
   },
 
@@ -75,14 +72,9 @@ var GameOfLife = {
     }
     this.world = this.nextWorld.slice(0);
   }
-
 };
 
-
-
 $(document).ready(function() {
-
-
     var x, y;
     var gameOfLife = Object.create(GameOfLife);
     gameOfLife.initialize(80, 60);
@@ -92,7 +84,6 @@ $(document).ready(function() {
         if (!(parseInt(Math.random() * 3))) {
           gameOfLife.setStatus(x, y, true);
         }
-
       }
     }
 
@@ -122,140 +113,4 @@ $(document).ready(function() {
 
     window.setInterval(mainLoop, 100);
     mainLoop();
-
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//   $("#game-setup").submit(function(event){
-
-//     // var length = $("#xcord").val();
-//     // var height = $("#ycord").val();
-
-// //    gameOfLife.initialize(length, height);
-
-//     var x, y;
-//     var gameOfLife = Object.create(GameOfLife);
-//     gameOfLife.initialize(80, 50);
-
-//     for(y=0;y < 50;y++) {
-//       for(x = 0; x < 80; x++) {
-//         if (!(parseInt(Math.random() * 3))) {
-//           gameOfLife.setStatus(x, y, true);
-//         }
-
-//       }
-//     }
-//     // gameOfLife.setStatus(1,1, true);
-//     // gameOfLife.setStatus(1,2, true);
-//     // gameOfLife.setStatus(1,3, true);
-
-//     $("#game-board").show();
-
-//     var mainLoop = function() {
-//       console.log(gameOfLife.world);
-
-//       gameOfLife.generation();
-
-//       $("#game-board").empty();
-
-//       var tableHTML = "";
-//       for( y=0; y < gameOfLife.sizeY; y++) {
-//         tableHTML = tableHTML + "<tr>";
-//         //$("#game-board").append("<tr>");
-//         for( x=0; x < gameOfLife.sizeX; x++) {
-//           if (gameOfLife.getStatus(x, y)) {
-//             tableHTML = tableHTML + "<td class='nonblank'>&nbsp;</td>";
-//             //$('#game-board').append("<td class='nonblank'>&nbsp;</td>");
-//           } else {
-//             tableHTML = tableHTML + "<td class='blank'>&nbsp;</td>";
-//             //$('#game-board').append("<td class='blank'>&nbsp;</td>");
-//           }
-//         }
-
-//         tableHTML = tableHTML + "</tr>";
-//         //$("td:last-child").after("</tr>");
-//       }
-
-//       $("#game-board").append(tableHTML);
-//     }
-
-
-//     window.setInterval(mainLoop, 100);
-//     mainLoop();
-//     event.preventDefault();
-//   });
-// });
-
